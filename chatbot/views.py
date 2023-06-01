@@ -84,7 +84,7 @@ class InterviewQuestionGenerator(generics.GenericAPIView):
         for source in sources:
             for chunk in splitter.split_text(source.page_content):
                 chunks.append(Document(page_content=chunk, metadata=source.metadata)) 
-        index = FAISS.from_documents(chunks, OpenAIEmbeddings(openai_api_key='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'))
+        index = FAISS.from_documents(chunks, OpenAIEmbeddings(openai_api_key='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'))
         template = """You are a Hr AI Chat you have a Candidate Resume in this there are all the Data of the Candidate. Write 15 techniacal Question based on their Resume Skills and Technology.
 
         QUESTION: {question}
@@ -93,7 +93,7 @@ class InterviewQuestionGenerator(generics.GenericAPIView):
         =========
         FINAL ANSWER:"""
         PROMPT = PromptTemplate(template=template, input_variables=["summaries", "question"])
-        chain = load_qa_with_sources_chain(OpenAIChat(openai_api_key='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', temperature=0, model_name="gpt-3.5-turbo"), prompt=PROMPT)
+        chain = load_qa_with_sources_chain(OpenAIChat(openai_api_key='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', temperature=0, model_name="gpt-3.5-turbo"), prompt=PROMPT)
         def answer(question):
             mainans = (
                 chain(
@@ -248,7 +248,7 @@ class ChatUserJobWiseView(APIView):
     def post(self, request, refid ,format=None):
         prompt = request.POST.get('prompt')
         final_arr= []
-        openai.api_key='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'
+        openai.api_key='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'
         pinecone.init(api_key='7f1409cf-e246-4b48-810c-e8b6f9a6ef3b', environment='us-east1-gcp')
         index = pinecone.Index('somhako')        
         query = "Show all the Candidate"
@@ -280,7 +280,7 @@ class ChatUserJobWiseView(APIView):
             for chunk in splitter.split_text(i.page_content):
                 # print(i.metadata)
                 chunks.append(Document(page_content=chunk, metadata=i.metadata)) 
-        data = FAISS.from_documents(chunks, OpenAIEmbeddings(openai_api_key='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'))
+        data = FAISS.from_documents(chunks, OpenAIEmbeddings(openai_api_key='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'))
         template = """You are a Hr AI Assistance who have candidates data of summary , Skills, current salary, expected salary, Name, Email, Phone. You need to find the Candidates on the basis of questions and Return their Name and Email
 
         QUESTION: {question}
@@ -289,7 +289,7 @@ class ChatUserJobWiseView(APIView):
         =========
         FINAL ANSWER:"""
         PROMPT = PromptTemplate(template=template, input_variables=["summaries", "question"])
-        chain = load_qa_with_sources_chain(OpenAIChat(openai_api_key='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', temperature=0, model_name="gpt-3.5-turbo"), prompt=PROMPT)
+        chain = load_qa_with_sources_chain(OpenAIChat(openai_api_key='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', temperature=0, model_name="gpt-3.5-turbo"), prompt=PROMPT)
         def answer(question):
             # print(chain)
             mainans = (
@@ -329,7 +329,7 @@ class ChatUserOrganizationWiseView(APIView):
 
         prompt = request.POST.get('prompt')
         final_arr= []
-        openai.api_key='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'
+        openai.api_key='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'
         pinecone.init(api_key='7f1409cf-e246-4b48-810c-e8b6f9a6ef3b', environment='us-east1-gcp')
         index = pinecone.Index('somhako')        
         query = "Show all the Candidate"
@@ -361,7 +361,7 @@ class ChatUserOrganizationWiseView(APIView):
             for chunk in splitter.split_text(i.page_content):
                 # print(i.metadata)
                 chunks.append(Document(page_content=chunk, metadata=i.metadata)) 
-        data = FAISS.from_documents(chunks, OpenAIEmbeddings(openai_api_key='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'))
+        data = FAISS.from_documents(chunks, OpenAIEmbeddings(openai_api_key='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'))
         template = """You are a Hr AI Assistance who have candidates data of summary , Skills, current salary, expected salary, Name, Email, Phone. You need to find the Candidates on the basis of questions and Return their Name and Email
 
         QUESTION: {question}
@@ -370,7 +370,7 @@ class ChatUserOrganizationWiseView(APIView):
         =========
         FINAL ANSWER:"""
         PROMPT = PromptTemplate(template=template, input_variables=["summaries", "question"])
-        chain = load_qa_with_sources_chain(OpenAIChat(openai_api_key='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', temperature=0, model_name="gpt-3.5-turbo"), prompt=PROMPT)
+        chain = load_qa_with_sources_chain(OpenAIChat(openai_api_key='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', temperature=0, model_name="gpt-3.5-turbo"), prompt=PROMPT)
         def answer(question):
             # print(chain)
             mainans = (

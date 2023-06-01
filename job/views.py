@@ -395,7 +395,7 @@ class ApplicantApplyView(APIView):
                 )
                 final_arr.append(final_dic)
             # print(final_arr)
-            openai.api_key = "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"
+            openai.api_key = "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"
             pinecone_vectors = []
             sources = []
             for i in final_arr:
@@ -421,7 +421,7 @@ class ApplicantApplyView(APIView):
                         Document(page_content=chunk, metadata=source.metadata)
                     )
             embeddings = OpenAIEmbeddings(
-                openai_api_key="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"
+                openai_api_key="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"
             )
             docsearch = Pinecone.from_documents(
                 chunks, embeddings, index_name="somhako"

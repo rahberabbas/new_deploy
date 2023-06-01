@@ -488,7 +488,7 @@ class ChatUserJobWiseView(APIView):
         for source in sources:
             for chunk in splitter.split_text(source.page_content):
                 chunks.append(Document(page_content=chunk, metadata=source.metadata)) 
-        index = FAISS.from_documents(chunks, OpenAIEmbeddings(openai_api_key='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'))
+        index = FAISS.from_documents(chunks, OpenAIEmbeddings(openai_api_key='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'))
         template = """You are a chatbot who have candidates data of summary , skills, current salary, expected salary.
 
         QUESTION: {question}
@@ -497,7 +497,7 @@ class ChatUserJobWiseView(APIView):
         =========
         FINAL ANSWER:"""
         PROMPT = PromptTemplate(template=template, input_variables=["summaries", "question"])
-        chain = load_qa_with_sources_chain(OpenAIChat(openai_api_key='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', temperature=0, model_name="gpt-3.5-turbo"), prompt=PROMPT)
+        chain = load_qa_with_sources_chain(OpenAIChat(openai_api_key='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', temperature=0, model_name="gpt-3.5-turbo"), prompt=PROMPT)
         def answer(question):
             mainans = (
                 chain(
